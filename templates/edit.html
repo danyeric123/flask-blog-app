@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-<form action="/posts" method="POST">
+<form action="/posts/{{post.id}}/edit" method="POST">
   <label class="form-label" for="title"> Title:
     <input 
     class="form-control" 
