@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Posts</title>
+{% endblock %}
+
+{% block body %}
+<h1>Posts Page</h1>
+<hr>
+<h2>Create New Blog Post:</h2>
+<form action="/posts" method="POSt">
+  <label class="form-label" for="title"> Title:
+    <input class="form-control" type="text" name="title" id="title">
+  </label>
+  <br>
+  <label class="form-label" for="content"> Content:
+    <textarea class="form-control" name="content" id="content" cols="30" rows="10"></textarea>
+  </label>
+  <br>
+  <label class="form-label" for="author"> Author:
+    <input class="form-control" type="text" name="author" id="author">
+  </label>
+  <br>
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+{% if posts %}
+  <div class="container row py-5 px-3">
+  {% for post in posts %}
+  <div class="card col mx-2" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{ post.title }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">
+        <a href="/posts/{{post.author}}">
+          {{post.author}}
+        </a>
+      </h6>
+      <p class="card-text">{{post.content}}</p>
+      <a role="button" class="btn btn-danger" href="/posts/{{post.id}}/delete">Delete</a>
+      <a role="button" class="btn btn-warning" href="/posts/{{post.id}}/edit">Edit</a>
+    </div>
+  </div>
+  {% endfor %} 
+</div>
+{% else %} 
+  <h4>No Posts Yet</h4>
+{% endif %}
+
+{% endblock %}
